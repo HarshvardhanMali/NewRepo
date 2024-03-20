@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+    <input type="text" id="dataInput" placeholder="Enter data" class="border border-gray-300 px-2 py-1 ">
+    <button onclick="addData()" class="bg-blue-500 text-white px-3 py-1 rounded-md ml-2">Add</button>
+
+    <ul id="dataList" class="mt-4"></ul>
+
+    <script>
+        function addData() {
+            var inputData = document.getElementById('dataInput').value;
+            if (inputData.trim() !== '') {
+                var dataList = document.getElementById('dataList');
+                var listItem = document.createElement('li');
+                listItem.textContent = inputData;
+
+                var updateButton = document.createElement('button');
+                updateButton.textContent = 'Update';
+                updateButton.className = 'bg-yellow-500 text-white px-2 py-1 rounded-md ml-2';
+                updateButton.onclick = function() {
+                    var updatedData = prompt('Enter updated data:', inputData);
+                    if (updatedData !== null) {
+                        listItem.textContent = updatedData;
+                    }
+                };
+
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.className = 'bg-red-500 text-white px-2 py-1 rounded-md ml-2';
+                deleteButton.onclick = function() {
+                    dataList.removeChild(listItem);
+                };
+
+                var spanElement = document.createElement('span');
+                spanElement.textContent = 'Additional Element';
+
+                listItem.appendChild(updateButton);
+                listItem.appendChild(deleteButton);
+                listItem.appendChild(spanElement); // New element appended here
+
+                dataList.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
